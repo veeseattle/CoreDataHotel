@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "Hotel.h"
+#import "Room.h"
 
 @interface AppDelegate ()
 
@@ -17,8 +19,50 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
+  [self seedDataBaseIfNeeded];
   return YES;
 }
+
+-(void)seedDataBaseIfNeeded {
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Hotel"];
+  NSError *fetchError;
+  
+  NSInteger results = [self.managedObjectContext countForFetchRequest:fetchRequest error:&fetchError];
+  NSLog(@" %ld", (long)results);
+  if (results == 0) {
+    NSURL *seedURL = [[NSBundle mainBundle] URLForResource:@"seed" withExtension:@"json"];
+    NSData *seedData = [[NSData alloc] initWithContentsOfURL:seedURL];
+    NSError *jsonError;
+    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:seedData options:0 error:&jsonError];
+    
+    if (!jsonError) {
+      NSArray *jsonArray = jsonDictionary[@"Hotels"];
+      
+      for (NSDictionary *hotelDictionary in jsonArray) {
+        Hotel *hotel = [NSEntityDescription insertNewObjectForEntityForName:@"Hotel" inManagedObjectContext:self.managedObjectContext];
+        hotel.name = hotelDictionary[@"name"];
+        hotel.rating = hotelDictionary[@"stars"];
+        hotel.location = hotelDictionary[@"location"];
+      
+      
+        NSArray *roomsArray = hotelDictionary[@"rooms"];
+        for (NSDictionary *roomDictionary in roomsArray) {
+          Room *room = [NSEntityDescription insertNewObjectForEntityForName:@"Room" inManagedObjectContext:self.managedObjectContext];
+          room.number = roomDictionary[@"number"];
+          room.beds = roomDictionary[@"beds"];
+          room.hotel = hotel;
+        }
+      }
+      NSError *saveError;
+      [self.managedObjectContext save:&saveError];
+      
+      if (saveError) {
+        NSLog(@"%@", saveError.localizedDescription);
+      }
+      }
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
   // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
