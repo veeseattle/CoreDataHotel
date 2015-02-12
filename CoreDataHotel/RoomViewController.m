@@ -10,6 +10,7 @@
 #import "Room.h"
 #import "AppDelegate.h"
 #import "Hotel.h"
+#import "BookRoomViewController.h"
 
 @interface RoomViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *roomsTable;
@@ -43,6 +44,14 @@
 }
 
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.identifier isEqualToString:@"BOOK_ROOM"]) {
+    BookRoomViewController *destinationVC = (BookRoomViewController *)segue.destinationViewController;
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    Room *room = self.rooms[indexPath.row];
+    destinationVC.selectedRoom = room;
+  }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
