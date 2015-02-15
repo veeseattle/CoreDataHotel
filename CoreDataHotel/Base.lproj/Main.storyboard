@@ -216,15 +216,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kvK-iv-WNa">
-                                <rect key="frame" x="140" y="219" width="320" height="162"/>
+                            <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kvK-iv-WNa">
+                                <rect key="frame" x="180" y="219" width="240" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="HeP-9V-CCK"/>
+                                </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="445386165.61390197">
                                     <!--2015-02-11 22:22:45 +0000-->
                                 </date>
                                 <locale key="locale" localeIdentifier="en_US"/>
                             </datePicker>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="W6B-Kb-On9">
-                                <rect key="frame" x="140" y="389" width="320" height="162"/>
+                            <datePicker autoresizesSubviews="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="W6B-Kb-On9">
+                                <rect key="frame" x="180" y="389" width="240" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="zav-Yh-T8d"/>
+                                </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="445386165.61390197">
                                     <!--2015-02-11 22:22:45 +0000-->
                                 </date>
@@ -290,24 +296,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="a8J-1G-WtL">
-                                <rect key="frame" x="28" y="350" width="320" height="162"/>
+                                <rect key="frame" x="68" y="350" width="240" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="yC5-Tc-koC"/>
+                                </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="445388009.83695602">
                                     <!--2015-02-11 22:53:29 +0000-->
                                 </date>
                             </datePicker>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kZL-Ul-I6k">
-                                <rect key="frame" x="28" y="172" width="320" height="162"/>
+                                <rect key="frame" x="68" y="172" width="240" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="eXE-bl-zce"/>
+                                </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="445388009.83695602">
                                     <!--2015-02-11 22:53:29 +0000-->
                                 </date>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPs-i2-4ee">
-                                <rect key="frame" x="128" y="530" width="121" height="30"/>
+                                <rect key="frame" x="127" y="530" width="121" height="30"/>
                                 <state key="normal" title="Check Availability">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="checkAvailbilityPressed:" destination="XeW-k7-3KU" eventType="touchUpInside" id="WSe-PI-b7T"/>
+                                    <segue destination="4Dy-Tf-5BT" kind="show" id="a1W-4w-seY"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bnN-NH-J4z">
@@ -355,6 +368,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HdJ-c6-As2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1037.5" y="-346.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="dQ4-v5-zAr">
+            <objects>
+                <viewController id="4Dy-Tf-5BT" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Eme-tM-MCk"/>
+                        <viewControllerLayoutGuide type="bottom" id="YSG-dx-j2I"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m2T-zd-fX3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="itx-dz-0VE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1632" y="-380"/>
         </scene>
     </scenes>
 </document>

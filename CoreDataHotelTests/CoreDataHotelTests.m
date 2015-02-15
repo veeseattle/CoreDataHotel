@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "HotelService.h"
+#import "Hotel.h"
+#import "Room.h"
+#import "Guest.h"
 
 @interface CoreDataHotelTests : XCTestCase
+
+@property (strong, nonatomic) HotelService *hotelService;
+@property (strong, nonatomic) Room *room;
+@property (strong, nonatomic) Guest *guest;
+@property (strong, nonatomic) Hotel *hotel;
+
 
 @end
 
@@ -17,13 +27,43 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+  self.hotelService = [[HotelService alloc] initForTesting];
+  self.hotel = [NSEntityDescription insertNewObjectForEntityForName:@"Hotel" inManagedObjectContext:self.hotelService.coreDataStack.managedObjectContext];
+  self.hotel.name = @"The Plaza Hotel";
+  self.hotel.location = @"New York";
+  self.hotel.rating = @1;
+  
+  self.room = [NSEntityDescription insertNewObjectForEntityForName:@"Room" inManagedObjectContext:self.hotelService.coreDataStack.managedObjectContext];
+  self.room.number = @402;
+  self.room.rate = @1;
+  self.room.hotel = self.hotel;
+  self.room.beds = @2;
+  
+  self.guest = [NSEntityDescription insertNewObjectForEntityForName:@"Guest" inManagedObjectContext:self.hotelService.coreDataStack.managedObjectContext];
+  self.guest.firstName = @"Vaniaaa";
+  self.guest.lastName = @"Kurniawati";
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
+  [super tearDown];
+  self.hotelService = nil;
+  self.hotel = nil;
+  self.guest = nil;
+  self.room = nil;
 }
+
+- (void)testAddReservation {
+  NSDate *startDate = [NSDate date];
+  NSCalendar *calendar = [NSCalendar currentCalendar];
+  NSDateComponents *components = [[NSDateComponents alloc] init];
+  components.day = 2;
+  NSDate *endDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+  
+  Reservation *reservation = [self.hotelService bookReservationForGuest:self.guest ForRoom:self.room startDate:startDate endDate:endDate];
+  XCTAssertNotNil(reservation,@"reservation should not be nil");
+  
+}
+
 
 - (void)testExample {
     // This is an example of a functional test case.
