@@ -296,7 +296,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="a8J-1G-WtL">
-                                <rect key="frame" x="68" y="350" width="240" height="162"/>
+                                <rect key="frame" x="68" y="316" width="240" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="yC5-Tc-koC"/>
                                 </constraints>
@@ -305,7 +305,7 @@
                                 </date>
                             </datePicker>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kZL-Ul-I6k">
-                                <rect key="frame" x="68" y="172" width="240" height="162"/>
+                                <rect key="frame" x="68" y="138" width="240" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="eXE-bl-zce"/>
                                 </constraints>
@@ -314,17 +314,16 @@
                                 </date>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPs-i2-4ee">
-                                <rect key="frame" x="127" y="530" width="121" height="30"/>
+                                <rect key="frame" x="127" y="494" width="121" height="30"/>
                                 <state key="normal" title="Check Availability">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="checkAvailbilityPressed:" destination="XeW-k7-3KU" eventType="touchUpInside" id="WSe-PI-b7T"/>
-                                    <segue destination="4Dy-Tf-5BT" kind="show" id="a1W-4w-seY"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bnN-NH-J4z">
-                                <rect key="frame" x="8" y="114" width="360" height="29"/>
+                                <rect key="frame" x="8" y="80" width="360" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="360" id="cRm-NR-eX4"/>
                                 </constraints>
@@ -335,19 +334,27 @@
                                     <segment title="Okay Motel"/>
                                 </segments>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJV-tr-arx">
+                                <rect key="frame" x="167" y="538" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GPs-i2-4ee" firstAttribute="top" secondItem="a8J-1G-WtL" secondAttribute="bottom" constant="18" id="3QV-k2-SeL"/>
+                            <constraint firstItem="GPs-i2-4ee" firstAttribute="top" secondItem="a8J-1G-WtL" secondAttribute="bottom" constant="16" id="3QV-k2-SeL"/>
+                            <constraint firstAttribute="centerX" secondItem="KJV-tr-arx" secondAttribute="centerX" id="4hA-RC-RKk"/>
                             <constraint firstItem="GPs-i2-4ee" firstAttribute="centerX" secondItem="a8J-1G-WtL" secondAttribute="centerX" id="C8d-tE-qU2"/>
                             <constraint firstItem="kZL-Ul-I6k" firstAttribute="top" secondItem="e5D-Fi-7Ig" secondAttribute="bottom" constant="36" id="FHx-dz-RJE"/>
                             <constraint firstItem="kZL-Ul-I6k" firstAttribute="leading" secondItem="a8J-1G-WtL" secondAttribute="leading" id="HA7-cF-zAI"/>
                             <constraint firstItem="kZL-Ul-I6k" firstAttribute="centerX" secondItem="bnN-NH-J4z" secondAttribute="centerX" id="Nbr-wE-sXK"/>
                             <constraint firstItem="kZL-Ul-I6k" firstAttribute="top" secondItem="bnN-NH-J4z" secondAttribute="bottom" constant="30" id="Oes-QR-nVX"/>
                             <constraint firstAttribute="centerX" secondItem="a8J-1G-WtL" secondAttribute="centerX" id="TaA-CY-asX"/>
-                            <constraint firstItem="bnN-NH-J4z" firstAttribute="top" secondItem="e5D-Fi-7Ig" secondAttribute="bottom" constant="50" id="Vax-xt-g9U"/>
+                            <constraint firstItem="bnN-NH-J4z" firstAttribute="top" secondItem="e5D-Fi-7Ig" secondAttribute="bottom" constant="16" id="Vax-xt-g9U"/>
                             <constraint firstItem="a8J-1G-WtL" firstAttribute="top" secondItem="kZL-Ul-I6k" secondAttribute="bottom" constant="16" id="ciR-Mn-YU7"/>
                             <constraint firstItem="bnN-NH-J4z" firstAttribute="top" secondItem="e5D-Fi-7Ig" secondAttribute="bottom" id="fra-Qi-wmN"/>
+                            <constraint firstItem="KJV-tr-arx" firstAttribute="top" secondItem="GPs-i2-4ee" secondAttribute="bottom" constant="8" id="kuN-DH-cpd"/>
                             <constraint firstAttribute="centerY" secondItem="a8J-1G-WtL" secondAttribute="centerY" id="xcg-6u-CqZ"/>
                         </constraints>
                         <variation key="default">
@@ -360,6 +367,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="availStatement" destination="KJV-tr-arx" id="wKn-O8-dTq"/>
                         <outlet property="endDatePicker" destination="a8J-1G-WtL" id="gDD-dJ-KAT"/>
                         <outlet property="hotelSegmentControl" destination="bnN-NH-J4z" id="vHx-Mx-Kag"/>
                         <outlet property="startDatePicker" destination="kZL-Ul-I6k" id="xhr-0I-H4U"/>
@@ -368,24 +376,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HdJ-c6-As2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1037.5" y="-346.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="dQ4-v5-zAr">
-            <objects>
-                <viewController id="4Dy-Tf-5BT" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Eme-tM-MCk"/>
-                        <viewControllerLayoutGuide type="bottom" id="YSG-dx-j2I"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="m2T-zd-fX3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="itx-dz-0VE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1632" y="-380"/>
         </scene>
     </scenes>
 </document>

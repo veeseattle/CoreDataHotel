@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *hotelSegmentControl;
+@property (weak, nonatomic) IBOutlet UILabel *availStatement;
 @property (strong,nonatomic) NSManagedObjectContext *context;
 @end
 
@@ -62,12 +63,13 @@
   NSPredicate *roomsPredicate = [NSPredicate predicateWithFormat:@"hotel.name MATCHES %@ AND NOT (self IN %@)",selectedHotel, rooms];
   anotherFetchRequest.predicate = roomsPredicate;
   NSError *finalError;
-  NSArray *finalResults = [self.context executeFetchRequest:anotherFetchRequest error:&finalError];
+  NSArray *finalResults = [[[HotelService sharedService] coreDataStack].managedObjectContext executeFetchRequest:anotherFetchRequest error:&finalError];
+                           
   if (finalError) {
     NSLog(@"%@",finalError.localizedDescription);
   }
   
-  NSLog(@"results : %lu",(unsigned long)finalResults.count);
+  self.availStatement.text = [NSString stringWithFormat:@"there are %lu rooms available during this period",(unsigned long)finalResults.count];
   
 }
 
