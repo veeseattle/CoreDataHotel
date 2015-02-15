@@ -64,6 +64,18 @@
   
 }
 
+-(void)testInvalidDates {
+  NSDate *startDate = [NSDate date];
+  NSCalendar *calendar = [NSCalendar currentCalendar];
+  NSDateComponents *components = [[NSDateComponents alloc] init];
+  [components setDay:-6];
+  NSDate *endDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+  Reservation *reservation = [self.hotelService bookReservationForGuest:self.guest ForRoom:self.room startDate:startDate endDate:endDate];
+
+  XCTAssertNil(reservation,@"end date should be greater than or equal to start date");
+  
+  
+}
 
 - (void)testExample {
     // This is an example of a functional test case.

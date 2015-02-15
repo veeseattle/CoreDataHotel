@@ -44,13 +44,14 @@
   
   NSError *saveError;
   [self.coreDataStack.managedObjectContext save:&saveError];
-  if (!saveError) {
-    return reservation;
-  } else {
-    return nil;
+  if (startDate  > endDate) {
+    if (!saveError) {
+      return reservation;
+    }
   }
+  return nil;
 }
 
 
-
+  
 @end

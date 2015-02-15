@@ -45,7 +45,6 @@
   NSError *fetchError;
   
   NSInteger results = [self.managedObjectContext countForFetchRequest:fetchRequest error:&fetchError];
-  NSLog(@" %ld", (long)results);
   if (results == 0) {
     NSURL *seedURL = [[NSBundle mainBundle] URLForResource:@"seed" withExtension:@"json"];
     NSData *seedData = [[NSData alloc] initWithContentsOfURL:seedURL];

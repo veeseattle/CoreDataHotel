@@ -34,43 +34,44 @@
 
 - (IBAction)checkAvailbilityPressed:(id)sender {
   
-  //for hotel name = selectedHotel, return all rooms
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Room"];
-  NSString *selectedHotel = [self.hotelSegmentControl titleForSegmentAtIndex:self.hotelSegmentControl.selectedSegmentIndex];
-  
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.hotel.name MATCHES %@",selectedHotel];
-  fetchRequest.predicate = predicate;
-  NSError *fetchErr;
-  NSArray *roomResults = [self.context executeFetchRequest:fetchRequest error:&fetchErr];
-  NSLog(@"there are %lu rooms in this hotel", roomResults.count);
-  
-  //for the rooms fetched above, return reservations within the specified time period
-  NSFetchRequest *reservationFetch = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
-  NSPredicate *reservationPredicate = [NSPredicate predicateWithFormat:@"room.hotel.name MATCHES %@ AND startDate <= %@ AND endDate >= %@", selectedHotel,self.endDatePicker.date, self.startDatePicker.date];
-  reservationFetch.predicate = reservationPredicate;
-  NSError *fetchError;
-  
-  NSArray *results = [self.context executeFetchRequest:reservationFetch error:&fetchError];
-  
-  NSMutableArray *rooms = [NSMutableArray new];
-  for (Reservation *reservation in results) {
-    [rooms addObject:reservation.room];
+
+    //for hotel name = selectedHotel, return all rooms
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Room"];
+    NSString *selectedHotel = [self.hotelSegmentControl titleForSegmentAtIndex:self.hotelSegmentControl.selectedSegmentIndex];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.hotel.name MATCHES %@",selectedHotel];
+    fetchRequest.predicate = predicate;
+    NSError *fetchErr;
+    NSArray *roomResults = [self.context executeFetchRequest:fetchRequest error:&fetchErr];
+    NSLog(@"there are %lu rooms in this hotel", roomResults.count);
+    
+    //for the rooms fetched above, return reservations within the specified time period
+    NSFetchRequest *reservationFetch = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
+    NSPredicate *reservationPredicate = [NSPredicate predicateWithFormat:@"room.hotel.name MATCHES %@ AND startDate <= %@ AND endDate >= %@", selectedHotel,self.endDatePicker.date, self.startDatePicker.date];
+    reservationFetch.predicate = reservationPredicate;
+    NSError *fetchError;
+    
+    NSArray *results = [self.context executeFetchRequest:reservationFetch error:&fetchError];
+    
+    NSMutableArray *rooms = [NSMutableArray new];
+    for (Reservation *reservation in results) {
+      [rooms addObject:reservation.room];
+    }
+    
+    NSLog(@"number of reservation : %lu", rooms.count);
+    
+    NSFetchRequest *anotherFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Room"];
+    NSPredicate *roomsPredicate = [NSPredicate predicateWithFormat:@"hotel.name MATCHES %@ AND NOT (self IN %@)",selectedHotel, rooms];
+    anotherFetchRequest.predicate = roomsPredicate;
+    NSError *finalError;
+    NSArray *finalResults = [self.context executeFetchRequest:anotherFetchRequest error:&finalError];
+    
+    if (finalError) {
+      NSLog(@"%@",finalError.localizedDescription);
+    }
+    
+    self.availStatement.text = [NSString stringWithFormat:@"there are %lu rooms available during this period",(unsigned long)finalResults.count];
   }
-  
-  NSLog(@"number of reservation : %lu", rooms.count);
-  
-  NSFetchRequest *anotherFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Room"];
-  NSPredicate *roomsPredicate = [NSPredicate predicateWithFormat:@"hotel.name MATCHES %@ AND NOT (self IN %@)",selectedHotel, rooms];
-  anotherFetchRequest.predicate = roomsPredicate;
-  NSError *finalError;
-  NSArray *finalResults = [self.context executeFetchRequest:anotherFetchRequest error:&finalError];
-                           
-  if (finalError) {
-    NSLog(@"%@",finalError.localizedDescription);
-  }
-  
-  self.availStatement.text = [NSString stringWithFormat:@"there are %lu rooms available during this period",(unsigned long)finalResults.count];
-  
-}
+
 
 @end
