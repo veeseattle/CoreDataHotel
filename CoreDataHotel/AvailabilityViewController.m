@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  self.context = [[HotelService sharedService]coreDataStack].managedObjectContext;
   // Do any additional setup after loading the view.
 }
 
