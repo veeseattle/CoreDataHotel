@@ -41,7 +41,7 @@
   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.hotel.name MATCHES %@",selectedHotel];
   fetchRequest.predicate = predicate;
   NSError *fetchErr;
-  NSArray *roomResults = [[[HotelService sharedService] coreDataStack].managedObjectContext executeFetchRequest:fetchRequest error:&fetchErr];
+  NSArray *roomResults = [self.context executeFetchRequest:fetchRequest error:&fetchErr];
   NSLog(@"there are %lu rooms in this hotel", roomResults.count);
   
   //for the rooms fetched above, return reservations within the specified time period
@@ -50,7 +50,7 @@
   reservationFetch.predicate = reservationPredicate;
   NSError *fetchError;
   
-  NSArray *results = [[[HotelService sharedService] coreDataStack].managedObjectContext executeFetchRequest:reservationFetch error:&fetchError];
+  NSArray *results = [self.context executeFetchRequest:reservationFetch error:&fetchError];
   
   NSMutableArray *rooms = [NSMutableArray new];
   for (Reservation *reservation in results) {
@@ -63,7 +63,7 @@
   NSPredicate *roomsPredicate = [NSPredicate predicateWithFormat:@"hotel.name MATCHES %@ AND NOT (self IN %@)",selectedHotel, rooms];
   anotherFetchRequest.predicate = roomsPredicate;
   NSError *finalError;
-  NSArray *finalResults = [[[HotelService sharedService] coreDataStack].managedObjectContext executeFetchRequest:anotherFetchRequest error:&finalError];
+  NSArray *finalResults = [self.context executeFetchRequest:anotherFetchRequest error:&finalError];
                            
   if (finalError) {
     NSLog(@"%@",finalError.localizedDescription);

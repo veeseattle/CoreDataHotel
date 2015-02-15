@@ -26,6 +26,7 @@
   [super viewDidLoad];
   self.hotelTable.dataSource = self;
   self.hotelTable.delegate = self;
+  
   //NSManagedObjectContext *context = appDelegate.managedObjectContext;
   
   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Hotel"];
